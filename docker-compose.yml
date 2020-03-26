@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: "postgres:11"
+    environment:
+      POSTGRES_DB: "db"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_PASSWORD: "password"
+    container_name: "my_postgres"
+    ports:
+      - "54320:5432"
+    volumes:
+      - my_dbdata:/var/lib/postgresql/data
+  web:
+    build: .
+    container_name: "django-app"
+    environment:
+      - DB_HOST = "db"
+      - DB = "postgres"
+      - DB_USER = "postgres"
+      - DB_PORT = 5432
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+volumes:
+  my_dbdata:

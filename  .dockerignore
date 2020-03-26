@@ -1,0 +1,5 @@
+mysite/venv
+Dockerfile
+docker-compose.yml
+docker-compose_postgres.yml
+.dockerignore
